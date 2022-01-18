@@ -117,15 +117,16 @@ function Game(props: GameProps) {
           }
         }
       }
+      setTarget(currentGuess);
       setGuesses((guesses) => guesses.concat([currentGuess]));
       setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
-        `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
+        `You ${verbed}! The answer was ${currentGuess.toUpperCase()}. (Enter to ${
           challenge ? "play a random game" : "play again"
         })`;
 
-      if (currentGuess === target) {
+      if (true) {
         setHint(gameOver("won"));
         setGameState(GameState.Won);
       } else if (guesses.length + 1 === props.maxGuesses) {
@@ -235,36 +236,6 @@ function Game(props: GameProps) {
         {hint || `\u00a0`}
       </p>
       <Keyboard letterInfo={letterInfo} onKey={onKey} />
-      {gameState !== GameState.Playing && !challenge && (
-        <p>
-          <button
-            onClick={() => {
-              const url = getChallengeUrl(target);
-              if (!navigator.clipboard) {
-                setHint(url);
-              } else {
-                navigator.clipboard
-                  .writeText(url)
-                  .then(() => {
-                    setHint("Challenge link copied to clipboard!");
-                  })
-                  .catch(() => {
-                    setHint(url);
-                  });
-              }
-            }}
-          >
-            Challenge a friend to this word
-          </button>
-        </p>
-      )}
-      {challenge ? (
-        <div className="Game-seed-info">playing a challenge game</div>
-      ) : seed ? (
-        <div className="Game-seed-info">
-          seed {seed}, length {wordLength}, game {gameNumber}
-        </div>
-      ) : undefined}
     </div>
   );
 }

@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App-container">
       <h1>
-        <span style={hard ? { color: "#e66" } : {}}>hell</span>o wordl
+        Luckle 🍀
       </h1>
       <div className="top-right">
         {page !== "game" ? (
@@ -88,17 +88,6 @@ function App() {
           visibility: page === "game" ? "visible" : "hidden",
         }}
       >
-        <a
-          href="#"
-          onClick={() =>
-            (document.location = seed
-              ? "?"
-              : "?seed=" +
-                new Date().toISOString().replace(/-/g, "").slice(0, 8))
-          }
-        >
-          {seed ? "Random" : "Today's"}
-        </a>
       </div>
       {page === "about" && <About />}
       {page === "settings" && (
